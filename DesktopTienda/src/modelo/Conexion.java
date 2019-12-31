@@ -13,7 +13,7 @@ private static Connection conexion;
 	String ip = "127.0.0.1";
 	String bd = "softcafe";
 	String user = "root";
-	String password = "";
+	String password = "rafaelrey2";
 	
 	public Conexion() {
 		try {

@@ -11,10 +11,14 @@ public class Proveedor {
     private String nombreComercial;
     private String direccion;
     private int codCiudad;
-    private int codDepartamento;
+    private int codProvincia;
     private long telefono;
 
-    public Proveedor(int id, long numDoc, int codTipoDoc, String nombreProv, String apellidoProv, String nombreComercial, String direccion, int codCiudad, int codDepartamento, long telefono) {
+    public Proveedor(int id) {
+        this.id = id;
+    }
+
+    public Proveedor(int id, long numDoc, int codTipoDoc, String nombreProv, String apellidoProv, String nombreComercial, String direccion, int codCiudad, int codProvincia, long telefono) {
         this.id = id;
         this.numDoc = numDoc;
         this.codTipoDoc = codTipoDoc;
@@ -23,11 +27,11 @@ public class Proveedor {
         this.nombreComercial = nombreComercial;
         this.direccion = direccion;
         this.codCiudad = codCiudad;
-        this.codDepartamento = codDepartamento;
+        this.codProvincia = codProvincia;
         this.telefono = telefono;
     }
 
-    public Proveedor(long numDoc, int codTipoDoc, String nombreProv, String apellidoProv, String nombreComercial, String direccion, int codCiudad, int codDepartamento, long telefono) {
+    public Proveedor(long numDoc, int codTipoDoc, String nombreProv, String apellidoProv, String nombreComercial, String direccion, int codCiudad, int codProvincia, long telefono) {
         this.numDoc = numDoc;
         this.codTipoDoc = codTipoDoc;
         this.nombreProv = nombreProv;
@@ -35,7 +39,7 @@ public class Proveedor {
         this.nombreComercial = nombreComercial;
         this.direccion = direccion;
         this.codCiudad = codCiudad;
-        this.codDepartamento = codDepartamento;
+        this.codProvincia = codProvincia;
         this.telefono = telefono;
     }
 
@@ -106,13 +110,6 @@ public class Proveedor {
         this.codCiudad = codCiudad;
     }
 
-    public int getCodDepartamento() {
-        return codDepartamento;
-    }
-
-    public void setCodDepartamento(int codDepartamento) {
-        this.codDepartamento = codDepartamento;
-    }
 
     public long getTelefono() {
         return telefono;
@@ -121,5 +118,14 @@ public class Proveedor {
     public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
+
+    public int getCodProvincia() {
+        return codProvincia;
+    }
+
+    public void setCodProvincia(int codProvincia) {
+        this.codProvincia = codProvincia;
+    }
+    
   
 }

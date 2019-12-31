@@ -1,41 +1,53 @@
 package Vista;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import modelo.Ciudad;
+import modelo.Proveedor;
+import modelo.Provincia;
 import modelo.TipoDeDocumento;
 
 public class RegistrarProveedor extends javax.swing.JFrame {
 
     private controlador.GestorProveedorControlador proveedorControlador;
     
-    private DefaultTableModel tabla;
+   public DefaultTableModel tabla;
 
     public RegistrarProveedor() {
         initComponents();
-
+        //Permanecera oculto al usuario y se usara para modificacion principalmente
+        txtId.setVisible(false);
+        //por medio de un array de String agregamos los titulos que tendra la tabla de los proveedores
         String titulos[] = {"ID", "Numero Doc", "Tipo de Doc", "Nombre Prov", "Apellido Prov", "Nombre Comercial",
-            "Dirección", "Ciudad", "Departamento", "Telefono"};
+            "Dirección", "Ciudad", "Provincia", "Telefono"};
+        //Agregamos los titulos a la nueva defaultable
         tabla = new DefaultTableModel(null, titulos);
         TblProveedores.setModel(tabla);
 
         proveedorControlador = new controlador.GestorProveedorControlador(this);
 
-        DefaultComboBoxModel<String> tipoDoc = new DefaultComboBoxModel<String>(proveedorControlador.cargarTipoDocumento());
+        DefaultComboBoxModel<TipoDeDocumento> tipoDoc = new DefaultComboBoxModel<TipoDeDocumento>(proveedorControlador.cargarTipoDocumento());
         CmbTipoDoc.setModel(tipoDoc);
-        
-         DefaultComboBoxModel<String> tipoCiudad = new DefaultComboBoxModel<String>(proveedorControlador.cargarCiudad());
-         CmbCiudad.setModel(tipoCiudad);
+        DefaultComboBoxModel<Ciudad> tipoCiudad = new DefaultComboBoxModel<Ciudad>(proveedorControlador.cargarCiudad());
+        CmbCiudad.setModel(tipoCiudad);
 
-        DefaultComboBoxModel<String> tipoProvincia = new DefaultComboBoxModel<String>(proveedorControlador.cargarProvincia());
+        DefaultComboBoxModel<Provincia> tipoProvincia = new DefaultComboBoxModel<Provincia>(proveedorControlador.cargarProvincia());
         CmbProvincia.setModel(tipoProvincia);
-
+        //Añadimos los actionListener a los botones para que el controlador pueda manejarlos.
         BtnBuscar.addActionListener(proveedorControlador);
-        
+        BtnRegistrar.addActionListener(proveedorControlador);
+        BtnModificar.addActionListener(proveedorControlador);
+        BtnEliminar.addActionListener(proveedorControlador);
+        TblProveedores.addMouseListener(proveedorControlador);        
     }
+
+ 
 
     public DefaultTableModel getTableModel() {
         return tabla;
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -60,16 +72,17 @@ public class RegistrarProveedor extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         CmbCiudad = new javax.swing.JComboBox<>();
-        CmbProvincia = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         BtnRegistrar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        CmbProvincia = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblProveedores = new javax.swing.JTable();
-        BtnCargar = new javax.swing.JButton();
         BtnBuscar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,12 +167,12 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 27, Short.MAX_VALUE)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CmbProvincia, 0, 120, Short.MAX_VALUE)
                     .addComponent(CmbCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 135, Short.MAX_VALUE)
+                    .addComponent(txtTelefono)
+                    .addComponent(CmbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(BtnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BtnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,7 +188,6 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(TxtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(CmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnRegistrar))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -185,8 +197,7 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                             .addComponent(CmbTipoDoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
                             .addComponent(TxtNombreComercial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(CmbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel9)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(BtnModificar)))
@@ -201,12 +212,19 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(TxtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(CmbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(CmbProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TblProveedores.setModel(new javax.swing.table.DefaultTableModel(
@@ -238,11 +256,16 @@ public class RegistrarProveedor extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TblProveedores);
 
-        BtnCargar.setText("Cargar");
-
         BtnBuscar.setText("Buscar");
 
         BtnEliminar.setText("Eliminar");
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,8 +275,9 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnCargar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar)
+                        .addGap(345, 345, 345)
                         .addComponent(BtnEliminar)
                         .addGap(41, 41, 41)
                         .addComponent(BtnBuscar)
@@ -262,21 +286,27 @@ public class RegistrarProveedor extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
+                .addGap(18, 18, 18)
+                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnCargar)
                     .addComponent(BtnBuscar)
-                    .addComponent(BtnEliminar))
+                    .addComponent(BtnEliminar)
+                    .addComponent(btnLimpiar))
                 .addContainerGap())
         );
 
@@ -286,6 +316,23 @@ public class RegistrarProveedor extends javax.swing.JFrame {
     private void TxtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtApellidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtApellidosActionPerformed
+    //Boton para limpiar busqueda y selecciones        
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        
+    tabla.setNumRows(0);
+    
+    TxtApellidos.setText(null);
+    TxtNombres.setText(null);
+    TxtNumeroDocumento.setText(null);
+    TxtNombreComercial.setText(null);
+    TxtDireccion.setText(null);
+    txtTelefono.setText(null);
+    
+    CmbCiudad.setSelectedIndex(0);
+    CmbProvincia.setSelectedIndex(0);
+    CmbTipoDoc.setSelectedIndex(0);
+   
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,19 +371,19 @@ public class RegistrarProveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BtnBuscar;
-    public javax.swing.JButton BtnCargar;
     public javax.swing.JButton BtnEliminar;
     public javax.swing.JButton BtnModificar;
     public javax.swing.JButton BtnRegistrar;
-    public javax.swing.JComboBox<String> CmbCiudad;
-    private javax.swing.JComboBox<String> CmbProvincia;
-    public javax.swing.JComboBox<String> CmbTipoDoc;
+    public javax.swing.JComboBox<Ciudad> CmbCiudad;
+    public javax.swing.JComboBox<Provincia> CmbProvincia;
+    public javax.swing.JComboBox<TipoDeDocumento> CmbTipoDoc;
     public javax.swing.JTable TblProveedores;
     public javax.swing.JTextField TxtApellidos;
     public javax.swing.JTextField TxtDireccion;
     public javax.swing.JTextField TxtNombreComercial;
     public javax.swing.JTextField TxtNombres;
     public javax.swing.JTextField TxtNumeroDocumento;
+    private javax.swing.JButton btnLimpiar;
     public javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -351,6 +398,7 @@ public class RegistrarProveedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    public javax.swing.JTextField txtId;
+    public javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

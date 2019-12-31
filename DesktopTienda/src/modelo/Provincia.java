@@ -14,6 +14,7 @@ public class Provincia {
         this.nombrePronvicia = nombrePronvicia;
     }
 
+
     public int getIdProvincia() {
         return idProvincia;
     }
