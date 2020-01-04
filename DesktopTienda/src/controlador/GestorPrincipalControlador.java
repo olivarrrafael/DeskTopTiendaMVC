@@ -9,11 +9,13 @@ public class GestorPrincipalControlador implements ActionListener {
 
     Vista.Principal formPrincipal;
     Vista.RegistrarProveedor proveedorRegistro;
+    Vista.RegistroProductos registroProductos;
     
     public GestorPrincipalControlador(Vista.Principal formprincipal) {
         
         this.formPrincipal=formprincipal;
         proveedorRegistro=new Vista.RegistrarProveedor();
+        registroProductos= new Vista.RegistroProductos();
         
     }
 
@@ -21,9 +23,10 @@ public class GestorPrincipalControlador implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==formPrincipal.proveedorFrame){
             
-            proveedorRegistro.setVisible(true);
-            
-            
+            proveedorRegistro.setVisible(true);           
+        }
+        if(e.getSource() == formPrincipal.btnRegistroProducto){
+            registroProductos.setVisible(true);
         }
         
         

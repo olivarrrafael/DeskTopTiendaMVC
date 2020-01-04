@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/modelo/Proveedor.java</file>
+            <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/Vista/RegistroProductos.java</file>
+            <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/controlador/ControladorProductos.java</file>
             <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/controlador/GestorProveedorControlador.java</file>
             <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/modelo/GestorProveedor.java</file>
+            <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/modelo/GestorProducto.java</file>
             <file>file:/C:/Users/dell/Documents/NetBeansProjects/DesktopTienda/src/Vista/RegistrarProveedor.java</file>
         </group>
     </open-files>

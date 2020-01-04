@@ -39,6 +39,8 @@ public class GestorProveedorControlador implements ActionListener,MouseListener 
         //metodo para registro de proveedores
         if (e.getSource() == formProveedor.BtnRegistrar) {            
             registrarProveedor();
+            limpiar();
+            
         }
         //metodo para la busqueda de proveedores
         if (e.getSource() == formProveedor.BtnBuscar) {
@@ -181,15 +183,15 @@ public class GestorProveedorControlador implements ActionListener,MouseListener 
 
         int parametro = 0;
         String valor = "";
-
+        //Realizamos una verificacion sencilla para traer a los proveedores por num de documento.
         if (formProveedor.TxtNumeroDocumento.getText().length() > 0) {
             parametro = 1;
-            valor = formProveedor.TxtNumeroDocumento.toString();
+            valor = formProveedor.TxtNumeroDocumento.getText();
         }
 
-        if (formProveedor.TxtNombreComercial.getText().length() > 0) {
+        if (formProveedor.TxtNumeroDocumento.getText().length() < 0) {
             parametro = 2;
-            valor = formProveedor.TxtNombreComercial.toString();
+            
         }
 
         LinkedList<modelo.Proveedor> prov = gestorProv.getProveedorBy(parametro, valor);
@@ -269,8 +271,7 @@ public class GestorProveedorControlador implements ActionListener,MouseListener 
     String direccion=formProveedor.TblProveedores.getValueAt(fila,6).toString();
     formProveedor.TxtDireccion.setText(direccion);
     String telefono=formProveedor.TblProveedores.getValueAt(fila,9).toString(); 
-    formProveedor.txtTelefono.setText(telefono);
-    
+    formProveedor.txtTelefono.setText(telefono);    
 }    
     //Metodo para modificar datos de los proveedores
     public void ModificarProveedor(){
@@ -354,6 +355,18 @@ public class GestorProveedorControlador implements ActionListener,MouseListener 
       int codigo = Integer.parseInt(code);
       gestorProv.eliminarProveedorBD(codigo);
         
+    }
+    public void limpiar(){
+    formProveedor.TxtApellidos.setText(null);
+    formProveedor.TxtNombres.setText(null);
+    formProveedor.TxtNumeroDocumento.setText(null);
+    formProveedor.TxtNombreComercial.setText(null);
+    formProveedor.TxtDireccion.setText(null);
+    formProveedor.txtTelefono.setText(null);
+    
+    formProveedor.CmbCiudad.setSelectedIndex(0);
+    formProveedor.CmbProvincia.setSelectedIndex(0);
+    formProveedor.CmbTipoDoc.setSelectedIndex(0);
     }
 
 }

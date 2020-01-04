@@ -46,6 +46,12 @@ public class Proveedor {
     public Proveedor() {
     }
 
+    Proveedor(int id, String nombreProv) {
+     this.id=id;
+     this.nombreProv=nombreProv;
+             
+    }
+
     public int getId() {
         return id;
     }
@@ -125,6 +131,11 @@ public class Proveedor {
 
     public void setCodProvincia(int codProvincia) {
         this.codProvincia = codProvincia;
+    }
+
+    @Override
+    public String toString() {
+        return nombreProv;
     }
     
   

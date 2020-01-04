@@ -6,14 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 public class GestorProveedor {
     
+    
+    
     private static Connection conexion;
+    
     Proveedor proveedor;
+    
     public GestorProveedor() {
         modelo.Conexion conn = new modelo.Conexion();
         conexion = conn.getConexion();
@@ -134,5 +140,37 @@ public class GestorProveedor {
             JOptionPane.showMessageDialog(null, "Error " + ex.getMessage());
         }
 }
+    
+     public Vector cargarProveedorBD(int id){
+        Vector datosCmb=new Vector();
+        modelo.Proveedor proveedor=null;
+        String sql=null;
+        
+        if(id==0){
+            sql="SELECT * FROM desktoptienda.proveedor ORDER BY nombre_proveedor DESC";
+            proveedor=new modelo.Proveedor(0,"Seleccione");
+            datosCmb.add(proveedor);            
+        }else{
+            sql="SELECT * FROM desktoptienda.proveedor WHERE idProveedor="+id;
+        }
+        try {
+          PreparedStatement ps = conexion.prepareStatement(sql);
+	  ResultSet rs = ps.executeQuery();
+          while(rs.next()){
+              proveedor=new modelo.Proveedor();
+              proveedor.setId(rs.getInt("idProveedor"));
+              proveedor.setNombreProv(rs.getString("nombre_Proveedor"));
+              datosCmb.add(proveedor);
+              
+          }
+            
+          ps.close();;
+          rs.close();
+          return datosCmb;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return datosCmb;
+    }
 
 }

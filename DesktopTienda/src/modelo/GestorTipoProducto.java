@@ -7,25 +7,24 @@ import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
-public class GestorTipoDeDocumento {
+public class GestorTipoProducto {
+    
+private static Connection conexion;
 
-    private static Connection conexion;
-
-    public GestorTipoDeDocumento() {
-        modelo.Conexion conn=new modelo.Conexion();
-        conexion=conn.getConexion();        
+    public GestorTipoProducto() {
+         modelo.Conexion conn=new modelo.Conexion();
+         conexion=conn.getConexion();      
     }
     
-    public Vector cargarTipoDeDocumentoBD(int id){
-        
+    public Vector cargarTipoProductos(int id){
         Vector datosCmb=new Vector();
-        modelo.TipoDeDocumento tipoDoc=null;
+        modelo.TipoProducto tipoProducto=null;
         String sql=null;
         
         if(id==0){
-            sql="SELECT * FROM desktoptienda.tipo_documento ORDER BY nombre_tipo_documento DESC";
-            tipoDoc=new modelo.TipoDeDocumento(0,"Seleccione");
-            datosCmb.add(tipoDoc);            
+            sql="SELECT * FROM desktoptienda.tipo_producto ORDER BY nombre_tipo_producto DESC";
+            tipoProducto=new modelo.TipoProducto(0,"Seleccione");
+            datosCmb.add(tipoProducto);            
         }else{
             sql="SELECT * FROM desktoptienda.tipo_documento WHERE idTipo_documento="+id;
         }
@@ -33,10 +32,10 @@ public class GestorTipoDeDocumento {
           PreparedStatement ps = conexion.prepareStatement(sql);
 	  ResultSet rs = ps.executeQuery();
           while(rs.next()){
-              tipoDoc=new modelo.TipoDeDocumento();
-              tipoDoc.setId(rs.getInt("idTipo_documento"));
-              tipoDoc.setNombre(rs.getString("nombre_tipo_documento"));
-              datosCmb.add(tipoDoc);
+              tipoProducto=new modelo.TipoProducto();
+              tipoProducto.setIdTipoProducto(rs.getInt("idTipo_producto"));
+              tipoProducto.setNombreTipoProducto(rs.getString("nombre_tipo_producto"));
+              datosCmb.add(tipoProducto);
               
           }
             
@@ -48,6 +47,7 @@ public class GestorTipoDeDocumento {
         }
         return datosCmb;
     }
+    }
 
-    
-}
+  
+
